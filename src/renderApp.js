@@ -2,19 +2,22 @@ import React from 'react';
 import {render} from 'react-dom';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
-import Root from './components/Root'
 import {BrowserRouter} from 'react-router-dom';
+
+import Root from './components/Root';
+import Header from './components/Header';
+import Footer from './components/Footer';
 import reducer from './reducers/index';
-require('./favicon.ico');
+require('./mt_favicon.ico');
 import './styles/styles.scss'; //You can import SASS/CSS files too! Webpack will run the associated loader and plug this into the page.
 
 const store = createStore(reducer);
 
 const App = (props) => (
     <div>
-      {/*<Header/>*/}
+      <Header/>
       <Root {... props}/>
-      {/*<Footer/>*/}
+      <Footer/>
     </div>
 );
 

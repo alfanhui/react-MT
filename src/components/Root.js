@@ -5,9 +5,8 @@ import NotFoundPage from './NotFoundPage';
 
 const Root = (props) => (
     <Switch>
-        <Route exact path="/" render={() => (<HomePage {...props}/>)}>
-          <Route exact path="*" render={() => (<NotFoundPage {...props}/>)}/>
-        </Route>
+        <Route exact path="/" render={() => (<HomePage {...props}/>)}/>
+        <Route exact path="*" render={() => (<NotFoundPage {...props}/>)}/>
     </Switch>
 )
 
