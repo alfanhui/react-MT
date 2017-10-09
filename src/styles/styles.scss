@@ -14,6 +14,10 @@ $footer-height: 5em;
     transform: translatez(0);
 }
 */
+@font-face {
+  font-family: "consolas";
+  src: local("./Consolas.ttf") format("truetype");
+  }
 
 /* Styles */
 html {
@@ -29,8 +33,15 @@ body {
   width: 100%;
   display: flex;
   flex-direction: column;
-
+  touch-action: none;
   overflow: hidden;
+}
+
+.lock-screen {
+    height: 100%;
+    overflow: hidden;
+    width: 100%;
+    position: fixed;
 }
 
 td {
@@ -38,7 +49,8 @@ td {
 }
 
 .h2 {
-  font: 50px 'Arial';
+  font-size: 50px;
+  font-family: "consolas";
   color: $vin-blue;
 }
 
@@ -52,9 +64,24 @@ td {
     padding: 0;
 }
 
-.content{
+.canvas{
+  border: solid black 1px;
   flex:1;
-  min-height: calc(100vh - #{$header-height + $footer-height});
+}
+
+.content{
+  margin-left:20px;
+  margin-right:20px;
+  //flex:1;
+  //min-height: calc(100vh - #{$header-height + $footer-height});
+  //display:flex;
+  //flex-direction: column;
+}
+
+button {
+  height:30px;
+  width:100px;
+  font-size: 20px;
 }
 
 .centered {
@@ -82,8 +109,8 @@ td {
 .head3 {
   display: flex;
   flex: 3;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .foot {
@@ -97,5 +124,4 @@ td {
 .foot1 {
   display:flex;
   flex:1;
-  flex-direction: column;
 }

@@ -8,10 +8,12 @@ import Root from './components/Root';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import reducer from './reducers/index';
-require('./mt_favicon.ico');
+require('./react_favicon.png');
 import './styles/styles.scss'; //You can import SASS/CSS files too! Webpack will run the associated loader and plug this into the page.
 
 const store = createStore(reducer);
+
+
 
 const App = (props) => (
     <div>
