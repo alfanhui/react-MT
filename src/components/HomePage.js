@@ -28,7 +28,10 @@ class HomePage extends React.Component{
   }
 
   componentDidMount(){
-    this.setState({ctx: this.refs.canvas.getContext('2d')});
+    let ctx = this.refs.canvas.getContext('2d')
+    ctx.canvas.width  = (window.screen.availWidth-48);
+    ctx.canvas.height = (window.screen.availHeight - 168 - 32);
+    this.setState({ctx: ctx});
   }
 
   componentDidUpdate(){
@@ -68,6 +71,8 @@ class HomePage extends React.Component{
       x = touch.pageX - rect.left,
       y = touch.pageY - rect.top;
 
+      console.log("[",x,":",y,"]");
+
       let $currentTouches = this.state.currentTouches;
       $currentTouches.push({
           id: touch.identifier,
@@ -80,8 +85,10 @@ class HomePage extends React.Component{
       $ctx.beginPath();
       $ctx.arc(x, y, 2.5, Math.PI*2, false);
       $ctx.fillStyle = touchColor;
+      $ctx.lineJoin = "round";
+      $ctx.lineWidth = 40;
       $ctx.fill();
-
+      $ctx.closePath();
       this.setState({currentTouches: $currentTouches, ctx:$ctx});
     }
   }
@@ -102,14 +109,17 @@ class HomePage extends React.Component{
             let rect = this.refs.canvas.getBoundingClientRect(),
             x = touch.pageX - rect.left,
             y = touch.pageY - rect.top;
-
+            //console.log("rect:", rect.left, ":", rect.top, " touch:", touch.pageX, ":", touch.pageY )
+            console.log("[",x,":",y,"]");
             let $ctx = this.refs.canvas.getContext('2d');
             $ctx.beginPath();
             $ctx.moveTo(currentTouch.pageX, currentTouch.pageY);
             $ctx.lineTo(x, y);
-            $ctx.lineWidth = 10;
+            //$ctx.lineCap = "round";
+            $ctx.lineWidth = 40;
             $ctx.strokeStyle = currentTouch.color;
             $ctx.stroke();
+            $ctx.closePath();
 
             // Update the touch record.
             currentTouch.pageX = x;
@@ -139,13 +149,16 @@ class HomePage extends React.Component{
            let rect = this.refs.canvas.getBoundingClientRect(),
            x = touch.pageX - rect.left,
            y = touch.pageY - rect.top;
-
+           console.log("[",x,":",y,"]");
+           
            let $ctx = this.refs.canvas.getContext('2d');
            $ctx.beginPath();
            $ctx.moveTo(currentTouch.pageX, currentTouch.pageY);
            $ctx.lineTo(x, y);
-           $ctx.lineWidth = 4;
+           $ctx.lineCap = "round";
+           $ctx.lineWidth = 40;
            $ctx.strokeStyle = currentTouch.color;
+           $ctx.closePath();
            $ctx.stroke();
 
            // Remove the record.
@@ -183,27 +196,34 @@ class HomePage extends React.Component{
         return("[" + obj.id.toString() + "] " + (parseInt(obj.pageX.toString())) + " : " + (parseInt(obj.pageY.toString())));
       })
       return (
-        <pre id="CurrentTouches">Touches: {tempArray.toString()}</pre>
+        <code>Touches: {tempArray.toString()}</code>
       )
     }
 
   render(){
     return (
-      <div id="test" className="content">
-        <canvas
-          className="canvas"
-          ref="canvas"
-          width={window.screen.availWidth}
-          height={window.screen.availHeight * .68}
-          onTouchStart={(event)=>this.touchStart(event)}
-          onTouchMove={(event)=>this.touchMove(event)}
-          onTouchEnd={(event)=>this.touchEnd(event)}
-          onTouchCancel={(event)=>this.touchCancel(event)}>
-
-        </canvas>
+      <div id="test" className="content" >
+        <div>
+          <canvas
+            className="canvas"
+            ref="canvas"
+            onTouchStart={(event)=>this.touchStart(event)}
+            onTouchMove={(event)=>this.touchMove(event)}
+            onTouchEnd={(event)=>this.touchEnd(event)}
+            onTouchCancel={(event)=>this.touchCancel(event)}
+            >
+            This Browser does not support html canvas.
+          </canvas>
+        </div>
           <br/>
-          <pre id="log">Log: {this.state.log}</pre>
-          {this.printTouches()}
+          <div style={{flex:1, flexDirection:'column', float:'left'}}>
+            <div  style={{display: 'flex', flex:"1 1 100%", flexDirection:'row'}}>
+              <code>Log: {this.state.log} </code>
+            </div>
+            <div style={{display: 'flex', flex:"1 1 100%", flexDirection:'row'}}>
+              {this.printTouches()}
+            </div>
+          </div>
       </div>
     );
   }

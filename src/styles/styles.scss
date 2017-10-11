@@ -30,11 +30,10 @@ body {
   -moz-font-smoothing: antialiased;
   -webkit-font-smoothing: antialiased;
   font-weight: 300;
-  width: 100%;
   display: flex;
   flex-direction: column;
+  text-align: center;
   touch-action: none;
-  overflow: hidden;
 }
 
 .lock-screen {
@@ -54,24 +53,11 @@ td {
   color: $vin-blue;
 }
 
-.input {
-    width: 40px;
-    height: 17px;
-    font-size: 20px;
-    font-weight: 600;
-    text-align: center;
-    margin: 0;
-    padding: 0;
-}
-
 .canvas{
   border: solid black 1px;
-  flex:1;
 }
 
 .content{
-  margin-left:20px;
-  margin-right:20px;
   //flex:1;
   //min-height: calc(100vh - #{$header-height + $footer-height});
   //display:flex;
@@ -113,12 +99,9 @@ button {
   justify-content: center;
 }
 
-.foot {
-  display:flex;
-  flex: 0 0 auto;
-  flex-direction: row;
-  height: $footer-height;
-  padding: 0.5em;
+footer {
+  padding-top: 10px;
+  clear:both;
 }
 
 .foot1 {
