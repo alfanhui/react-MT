@@ -150,7 +150,7 @@ class HomePage extends React.Component{
            x = touch.pageX - rect.left,
            y = touch.pageY - rect.top;
            console.log("[",x,":",y,"]");
-           
+
            let $ctx = this.refs.canvas.getContext('2d');
            $ctx.beginPath();
            $ctx.moveTo(currentTouch.pageX, currentTouch.pageY);
@@ -215,8 +215,7 @@ class HomePage extends React.Component{
             This Browser does not support html canvas.
           </canvas>
         </div>
-          <br/>
-          <div style={{flex:1, flexDirection:'column', float:'left'}}>
+          <div style={{flex:1, flexDirection:'column', float:'left', paddingLeft: '20px'}}>
             <div  style={{display: 'flex', flex:"1 1 100%", flexDirection:'row'}}>
               <code>Log: {this.state.log} </code>
             </div>

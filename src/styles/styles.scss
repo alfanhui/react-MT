@@ -34,6 +34,7 @@ body {
   flex-direction: column;
   text-align: center;
   touch-action: none;
+  margin:0;
 }
 
 .lock-screen {
@@ -100,6 +101,7 @@ button {
 }
 
 footer {
+  padding-left: 20px;
   padding-top: 10px;
   clear:both;
 }
