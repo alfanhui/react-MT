@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom'
 class React_Header extends React.Component{
   render(){
     return (
-    <header className="head">
+    <header className="head" id="head">
       <div className="head1"/>
       <div className="head3">
         <img src="../react_favicon.png" alt="Powered by React" height="50" width="50" style={{paddingRight:'20px'}}/>

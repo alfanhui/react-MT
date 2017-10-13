@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from "react-redux";
-import {COLOURS} from '../constants/components'
 
 @connect((store) => {
   return {
@@ -14,6 +13,7 @@ class HomePage extends React.Component{
   constructor(props) {
     super(props);
     this._swipe = {};
+    this.possHexValue = "0123456789ABCDEF";
     this.minDistance = 50;
     this.state = {
       log:"",
@@ -28,10 +28,17 @@ class HomePage extends React.Component{
   }
 
   componentDidMount(){
-    let ctx = this.refs.canvas.getContext('2d')
-    ctx.canvas.width  = (window.screen.availWidth-48);
-    ctx.canvas.height = (window.screen.availHeight - 168 - 80);
-    this.setState({ctx: ctx});
+    let $ctx = this.refs.canvas.getContext('2d')
+    let currentTouches;
+    if (/Android|iPhone|iPad/i.test(navigator.userAgent)) {
+      currentTouches = ["MOBILE"];
+    }else{
+      currentTouches = ["DESKTOP"];
+    }
+    let h = ((document.getElementById('head').clientHeight + document.getElementById('log').clientHeight + document.getElementById('foot').clientHeight) * 2);
+    $ctx.canvas.width  = (window.innerWidth * .99);
+    $ctx.canvas.height = (window.innerHeight - h);
+    this.setState({ctx: $ctx, log: currentTouches});
   }
 
   componentDidUpdate(){
@@ -43,9 +50,23 @@ class HomePage extends React.Component{
   }
 
   // Returns a random color from an array.
-  randomColour = () => (
-    COLOURS[Math.floor(Math.random() * COLOURS.length)]
-  )
+  randomColour(){
+    let hex = "#";
+    for (var i = 0; i < 6; i++){
+      hex += this.possHexValue.charAt(Math.floor(Math.random() * this.possHexValue.length));
+    }
+    console.log(hex);
+    return hex;
+  }
+
+  randomColourAlpha(){ //alpha causes issues when direction changes
+    let array = [];
+    for(let i = 0; i<3; i++){
+      array.push(Math.floor(Math.random() * 256));
+    }
+    array.push(Math.random()); //alpha
+    return ("rgba("+array[0]+", "+ array[1]+", "+array[2]+", "+ array[3]+")");
+  }
 
   // Finds the array index of a touch in the currentTouches array.
   findCurrentTouchIndex(id){
@@ -215,7 +236,7 @@ class HomePage extends React.Component{
       This Browser does not support html canvas.
       </canvas>
       </div>
-      <div style={{flex:1, flexDirection:'column', float:'left', paddingLeft: '20px'}}>
+      <div id="log" style={{flex:1, flexDirection:'column', float:'left', paddingLeft: '20px'}}>
       <div  style={{display: 'flex', flex:"1 1 100%", flexDirection:'row'}}>
       <code>Log: {this.state.log} </code>
       </div>
