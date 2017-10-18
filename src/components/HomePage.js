@@ -1,5 +1,7 @@
 import React from 'react';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
+import {tuioAddress} from '../constants/components';
+import Tuio from 'tuio';
 
 @connect((store) => {
   return {
@@ -20,11 +22,12 @@ class HomePage extends React.Component{
       swiped: false,
       currentTouches: [],
       ctx: undefined,
+      client: undefined,
     };
   }
 
   componentWillMount(){
-
+    this.setupTuio();
   }
 
   componentDidMount(){
@@ -47,6 +50,50 @@ class HomePage extends React.Component{
 
   componentWillUnmount(){
 
+  }
+
+  setupTuio(){
+    var $client = new Tuio.Client({
+      host: "http://localhost:5000"
+      }),
+
+      onAddTuioCursor = function(addCursor) {
+        console.log(addCursor);
+      },
+
+      onUpdateTuioCursor = function(updateCursor) {
+        console.log(updateCursor);
+      },
+
+      onRemoveTuioCursor = function(removeCursor) {
+        console.log(removeCursor);
+      },
+
+      onAddTuioObject = function(addObject) {
+          console.log(addObject);
+      },
+
+      onUpdateTuioObject = function(updateObject) {
+          console.log(updateObject);
+      },
+
+      onRemoveTuioObject = function(removeObject) {
+          console.log(removeObject);
+      },
+
+      onRefresh = function(time) {
+        console.log(time);
+      };
+
+      $client.on("addTuioCursor", onAddTuioCursor);
+      $client.on("updateTuioCursor", onUpdateTuioCursor);
+      $client.on("removeTuioCursor", onRemoveTuioCursor);
+      $client.on("addTuioObject", onAddTuioObject);
+      $client.on("updateTuioObject", onUpdateTuioObject);
+      $client.on("removeTuioObject", onRemoveTuioObject);
+      $client.on("refresh", onRefresh);
+      $client.connect();
+      this.setState({client:$client});
   }
 
   // Returns a random color from an array.
@@ -226,12 +273,12 @@ class HomePage extends React.Component{
       <div id="test" className="content" >
       <div>
       <canvas
-      className="canvas"
-      ref="canvas"
-      onTouchStart={(event)=>this.touchStart(event)}
-      onTouchMove={(event)=>this.touchMove(event)}
-      onTouchEnd={(event)=>this.touchEnd(event)}
-      onTouchCancel={(event)=>this.touchCancel(event)}
+        className="canvas"
+        ref="canvas"
+        onTouchStart={(event)=>this.touchStart(event)}
+        onTouchMove={(event)=>this.touchMove(event)}
+        onTouchEnd={(event)=>this.touchEnd(event)}
+        onTouchCancel={(event)=>this.touchCancel(event)}
       >
       This Browser does not support html canvas.
       </canvas>

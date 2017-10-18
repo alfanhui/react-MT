@@ -45,7 +45,8 @@
     "react-router-redux": "4.0.8",
     "react-text-field": "0.4.0",
     "redux": "3.6.0",
-    "redux-thunk": "2.1.0"
+    "redux-thunk": "2.1.0",
+    "tuio": "1.0.0"
   },
   "devDependencies": {
     "autoprefixer": "7.1.2",
