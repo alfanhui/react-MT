@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {tuioAddress} from '../constants/components';
-import Tuio from 'tuio';
+//import {tuioAddress} from '../constants/components';
+//import Tuio from 'tuio';
 
 @connect((store) => {
   return {
@@ -27,7 +27,7 @@ class HomePage extends React.Component{
   }
 
   componentWillMount(){
-    this.setupTuio();
+    //this.setupTuio();
   }
 
   componentDidMount(){
@@ -52,6 +52,7 @@ class HomePage extends React.Component{
 
   }
 
+    /*
   setupTuio(){
     var $client = new Tuio.Client({
       host: "http://localhost:5000"
@@ -95,6 +96,7 @@ class HomePage extends React.Component{
       $client.connect();
       this.setState({client:$client});
   }
+    */
 
   // Returns a random color from an array.
   randomColour(){
