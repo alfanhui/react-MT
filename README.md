@@ -1,4 +1,6 @@
-<p align="center"><img src="https://moduscreate.com/wp-content/uploads/2014/03/react-opti.png"/></p>
+<p align="center"><img src="https://github.com/alfanhui/react-MT/blob/master/docs/REACT%20MT.png"/></p>
+
+This is a prototype application using the React Slingshot boiler plate(https://github.com/coryhouse/react-slingshot). It is a Multi-Touch paint application. 
 
 Type `npm install && npm start` to start development in your default browser.
 
